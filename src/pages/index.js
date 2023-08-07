@@ -30,7 +30,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-1/2 grid grid-flow-row gap-3 mt-10">
+        <div className="lg:w-1/2 grid grid-flow-row gap-3 mt-10">
           <Input
             name="foodSearch"
             placeholder="Search on the menu"
@@ -48,7 +48,7 @@ export default function Home() {
               </svg>
             }
           />
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {[...Array(4)].map((item, i) => (
               <Card
                 key={i}
