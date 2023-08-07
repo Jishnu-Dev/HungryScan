@@ -21,11 +21,7 @@ export default function Home() {
           'min-h-screen w-screen flex flex-col justify-center items-center p-10': true,
           'bg-black': isDark,
           'bg-[url("/images/bg-pattern.jpg")] bg-repeat bg-contain': !isDark
-        })}
-        // style={{
-        //   backgroundImage: isDark ? 'url("/images/bg-pattern.jpg")' : 'none'
-        // }}
-      >
+        })}>
         <div className="w-full bg-white bg-gradient-to-r from-orange-100 via-yellow-400 to-orange-200 p-10 rounded-2xl">
           <div className="flex justify-between">
             <div>
