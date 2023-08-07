@@ -1,32 +1,53 @@
 import { Card, StyledAction, StyledBody } from 'baseui/card'
+import { Fragment, useState } from 'react'
 import { Heading, HeadingLevel } from 'baseui/heading'
+import { ParagraphSmall, ParagraphXSmall } from 'baseui/typography'
 
 import { Button } from 'baseui/button'
-import { Fragment } from 'react'
 import { Input } from 'baseui/input'
 import { Inter } from 'next/font/google'
-import { ParagraphSmall } from 'baseui/typography'
+import Link from 'next/link'
+import classNames from 'classnames'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [isDark, setIsDark] = useState(false)
+
   return (
     <Fragment>
       <div
-        className="min-h-screen w-screen bg-white flex flex-col justify-center items-center p-10
-      bg-[url('/images/bg-pattern.jpg')] bg-repeat bg-contain
-      ">
+        className={classNames({
+          'min-h-screen w-screen flex flex-col justify-center items-center p-10': true,
+          'bg-black': isDark,
+          'bg-[url("/images/bg-pattern.jpg")] bg-repeat bg-contain': !isDark
+        })}
+        // style={{
+        //   backgroundImage: isDark ? 'url("/images/bg-pattern.jpg")' : 'none'
+        // }}
+      >
         <div className="w-full bg-white bg-gradient-to-r from-orange-100 via-yellow-400 to-orange-200 p-10 rounded-2xl">
           <div className="flex justify-between">
             <div>
               <HeadingLevel>
-                <Heading styleLevel={5}>Welcome to Hungryscan Resto</Heading>
+                <Heading styleLevel={5}>
+                  Welcome to Hungryscan Resto Cafe
+                </Heading>
                 <ParagraphSmall>
                   Order your menu without waiting for the waiter
                 </ParagraphSmall>
               </HeadingLevel>
             </div>
-            <Button>Call Waiter</Button>
+            <div className="flex space-x-3">
+              <Button
+                kind="secondary"
+                onClick={() => {
+                  setIsDark(state => !state)
+                }}>
+                Dark Mode
+              </Button>
+              <Button>Call Waiter</Button>
+            </div>
           </div>
         </div>
 
@@ -48,7 +69,7 @@ export default function Home() {
               </svg>
             }
           />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="h-full overflow-y-scroll grid grid-cols-1 md:grid-cols-2 gap-3">
             {[...Array(4)].map((item, i) => (
               <Card
                 key={i}
@@ -63,7 +84,7 @@ export default function Home() {
                 </StyledBody>
                 <StyledAction>
                   <Button
-                    kind="secondary"
+                    // kind="secondary"
                     overrides={{ BaseButton: { style: { width: '100%' } } }}>
                     Add to Order
                   </Button>
@@ -71,14 +92,38 @@ export default function Home() {
               </Card>
             ))}
           </div>
-          <Button size="large">Confirm Your Order</Button>
+          <Button
+            size="large"
+            overrides={{
+              BaseButton: {
+                style: {
+                  backgroundColor: '#E23744',
+                  ':hover': {
+                    backgroundColor: '#be2837'
+                  }
+                }
+              }
+            }}>
+            Confirm Your Order
+          </Button>
         </div>
       </div>
 
-      <footer className="bg-gray-200 px-5 py-3">
-        <p className="text-sm text-black">
-          All rights reserved. C {new Date().getFullYear()} HungryScan.
-        </p>
+      <footer className="bg-black px-5 py-3 flex justify-between">
+        <ParagraphXSmall color="#FFF">
+          © {new Date().getFullYear()} HungryScan. All rights reserved.
+        </ParagraphXSmall>
+        <div className="flex space-x-3">
+          <Link href="/about">
+            <ParagraphXSmall color="FFF">About</ParagraphXSmall>
+          </Link>
+          <Link href="/privacy-policy">
+            <ParagraphXSmall color="FFF">Privacy Policy</ParagraphXSmall>
+          </Link>
+          <Link href="/terms">
+            <ParagraphXSmall color="FFF">Terms and Conditions</ParagraphXSmall>
+          </Link>
+        </div>
       </footer>
     </Fragment>
   )
